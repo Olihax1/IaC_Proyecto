@@ -7,6 +7,8 @@ resource "aws_lb" "seabook_alb" {
   subnets            = var.public_subnets
 
   enable_deletion_protection = false
+
+  drop_invalid_header_fields = true
 }
 
 # Target Group

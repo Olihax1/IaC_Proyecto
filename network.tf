@@ -3,6 +3,9 @@ resource "aws_globalaccelerator_accelerator" "seabook_ga" {
   name            = "${var.project_name}-accelerator"
   ip_address_type = "IPV4"
   enabled         = true
+
+  #checkov:skip=CKV_AWS_75: "Flow logs desactivados para optimizar recursos de AWS"
+  
 }
 
 resource "aws_globalaccelerator_listener" "ga_listener" {
