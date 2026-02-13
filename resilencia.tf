@@ -6,10 +6,14 @@ resource "aws_lb" "seabook_alb" {
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = var.public_subnets
 
-  enable_deletion_protection = false
+  #checkov:skip=CKV_AWS_150: "Proteccion de borrado desactivada intencionalmente para pruebas (false)"
+  enable_deletion_protection = false 
 
   drop_invalid_header_fields = true
   
+  #checkov:skip=CKV_AWS_91: "En este segmento no se requieren logs de acceso"
+  #checkov:skip=CKV2_AWS_20: "La redireccion HTTPS no se aplica para simplificar la demo"
+  #checkov:skip=CKV2_AWS_28: "WAF no obligatorio para nuestro entorno de pruebas inicial"
 }
 
 # Target Group
