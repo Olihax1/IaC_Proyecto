@@ -25,6 +25,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_http_servers" {
   from_port         = 80
   ip_protocol       = "tcp"
   to_port           = 80
+
+description = "Permitir trafico HTTP desde el balanceador"
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_out_servers" {
