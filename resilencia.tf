@@ -9,6 +9,7 @@ resource "aws_lb" "seabook_alb" {
   enable_deletion_protection = false
 
   drop_invalid_header_fields = true
+  
 }
 
 # Target Group
