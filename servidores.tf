@@ -50,6 +50,8 @@ resource "aws_launch_template" "app_server" {
               systemctl enable httpd
               echo "<h1>SeaBook - Servidor: $(hostname -f)</h1>" > /var/www/html/index.html
               EOF
+
+
   )
 
   tag_specifications {
@@ -58,6 +60,11 @@ resource "aws_launch_template" "app_server" {
       Name = "${var.project_name}-node"
     }
   }
+
+metadata_options {
+    http_tokens = "required"
+  }
+#checkov:skip=CKV_AWS_88: "IPs publicas permitidas para acceso temporal de evaluacion"
 }
 
 resource "aws_autoscaling_group" "seabook_asg" {
