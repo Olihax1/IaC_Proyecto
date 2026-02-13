@@ -41,7 +41,7 @@ resource "aws_wafv2_web_acl" "seabook_waf" {
   tags = {
     Name = "${var.project_name}-waf"
   }
-#checkov:skip=CKV_AWS_192: "WAF basico sin inspeccion profunda para demo"
+  #checkov:skip=CKV_AWS_192: "WAF basico sin inspeccion profunda para demo"
   #checkov:skip=CKV_AWS_175: "ACL sin reglas especificas para monitoreo inicial"
   #checkov:skip=CKV2_AWS_31: "Logging de WAF desactivado por costos"
 }
