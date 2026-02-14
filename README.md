@@ -53,24 +53,7 @@ durante picos de alta demanda.
 | **11** | **Observabilidad** (Monitoreo) | CloudWatch + X-Ray | Cada solicitud recibe un ID único → CloudWatch guarda los logs → X-Ray sigue el rastro por todo el sistema → Alertas si CPU supera 80% por 5 min | Llega una solicitud → Se le asigna Correlation ID → X-Ray traza su camino → CloudWatch alerta si algo falla en menos de 60 segundos |
 | **12** | **Desplegabilidad** (Actualizaciones sin caídas) | CodePipeline + CodeDeploy + ECR + Terraform | El programador hace git push → CodePipeline inicia el proceso → CodeDeploy actualiza con Blue/Green (servidores espejo) → Si hay error, vuelve atrás en 5 min | git push al repositorio → Escaneo de seguridad en ECR → Despliegue Blue/Green (sin caídas) → Si hay errores, rollback automático en 5 min |
 
-##  **5. CUADRO DE PASOS SEGUIDOS EN EL PROCESO DE TESTING CON COMANDOS UTILIZADOS**:
-
-| N° | Paso realizado | Descripción | Comandos utilizados | Buenas prácticas aplicadas | Autores que respaldan |
-|:--:|:---|:---|:---|:---|:---|
-| **1** | **Inicialización del proyecto** | Se configuró el proyecto Node.js para poder trabajar con testing automatizado. | `npm init -y` | Preparación de entorno controlado para pruebas. | **Kent Beck** – Destaca la importancia de preparar el entorno dentro del Desarrollo Guiado por Pruebas (TDD). |
-| **2** | **Instalación de Jest** | Se instaló Jest como herramienta principal para ejecutar pruebas unitarias. | `npm install --save-dev jest` | Uso de herramientas estándar de la industria. | **Kent Beck** – Promueve el uso de herramientas que permitan automatizar pruebas. |
-| **3** | **Configuración de Jest** | Se configuró el script de pruebas dentro del archivo package.json. | `"test": "jest"` (en package.json) | Automatización del proceso de testing. | **Kent Beck** – Relacionado con el ciclo Red-Green-Refactor. |
-| **4** | **Creación del archivo de pruebas** | Se creó el archivo donde se definieron los tests. | `calculadora.test.js` | Organización del código y separación entre lógica y pruebas. | **Robert C. Martin** – Promueve la separación de responsabilidades en Clean Code. |
-| **5** | **Desarrollo de pruebas pequeñas y enfocadas** | Se escribieron pruebas individuales para validar comportamientos específicos. | `test()` o `it()` | Pruebas pequeñas y enfocadas. | **Kent Beck** – Recomienda pruebas simples y específicas dentro del TDD. |
-| **6** | **Uso de nombres descriptivos** | Se asignaron nombres claros que indican qué comportamiento se valida. | `test("suma de dos numeros enteros positivos")` | Uso de nombres descriptivos. | **Robert C. Martin** – Indica que los nombres deben expresar la intención del código. |
-| **7** | **Uso del patrón AAA** | Se organizaron los tests en Arrange (Preparar), Act (Ejecutar) y Assert (Verificar). | Variables de prueba → ejecutar función → `expect(resultado).toBe()` | Estructura organizada de pruebas. | **Bill Wake** – Creador del patrón AAA utilizado en pruebas unitarias. |
-| **8** | **Validación de resultados correctos** | Se verificó que la función retorne el resultado esperado. | `expect(resultado).toBe(valorEsperado)` | Pruebas basadas en comportamiento. | **Kent Beck** – Establece que las pruebas deben validar comportamientos observables del sistema. |
-| **9** | **Validación de manejo de errores** | Se comprobó que la función lance excepciones ante datos inválidos. | `expect(() => suma()).toThrow()` | Pruebas de casos borde (Edge Cases). | **Glenford Myers, Martin Fowler, Jim Shore** – Destacan la importancia de probar límites y el principio Fail-Fast. |
-| **10** | **Independencia de pruebas** | Cada prueba se ejecuta sin depender de otra, usando sus propios datos. | Cada test con sus propios datos de prueba | Independencia de pruebas. | **Kent Beck** – Señala que cada prueba debe ejecutarse de manera independiente en TDD. |
-| **11** | **Ejecución automatizada de pruebas** | Se ejecutaron todos los tests para verificar el funcionamiento del sistema. | `npm test` | Automatización y validación continua. | **Kent Beck** – Propone ejecutar pruebas constantemente durante el desarrollo. |
-| **12** | **Verificación de resultados** | Se revisaron los reportes generados por Jest para confirmar que todas las pruebas pasen correctamente. | Salida en consola de Jest (resultados de pruebas) | Desarrollo de software confiable y robusto. | **Glenford Myers** – Indica que el testing permite detectar fallos y mejorar la calidad del software. |
-
-##  **6. CUADRO DE PASOS SEGUIDOS EN EL PROCESO DEl DESARROLLO DEL CODIGO**:
+##  **5. CUADRO DE PASOS SEGUIDOS EN EL PROCESO DEl DESARROLLO DEL CODIGO**:
 
 | Requisito / Atributo de Calidad | Tecnología AWS | Justificación Técnica | Documentación | Documentación |
 | :--- | :--- | :--- | :--- | :--- |
@@ -92,6 +75,23 @@ durante picos de alta demanda.
 | Auditabilidad | AWS CloudTrail y Amazon S3 Object Lock | Registro de actividad de API y almacenamiento inmutable de logs | <https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail> / <https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_object_lock_configuration> | |
 | Observabilidad | Amazon CloudWatch y AWS X-Ray | Monitoreo de métricas, logs y trazabilidad de peticiones de extremo a extremo | <https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm> / <https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/xray_group> | |
 | Despliegue | AWS CodePipeline y CodeDeploy , Terraform y Ansible | Automatización de CI/CD y gestión de Infraestructura como Código (IaC) | <https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codepipeline> / <https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codedeploy_app> | |
+
+##  **6. CUADRO DE PASOS SEGUIDOS EN EL PROCESO DE TESTING CON COMANDOS UTILIZADOS**:
+
+| N° | Paso realizado | Descripción | Comandos utilizados | Buenas prácticas aplicadas | Autores que respaldan |
+|:--:|:---|:---|:---|:---|:---|
+| **1** | **Inicialización del proyecto** | Se configuró el proyecto Node.js para poder trabajar con testing automatizado. | `npm init -y` | Preparación de entorno controlado para pruebas. | **Kent Beck** – Destaca la importancia de preparar el entorno dentro del Desarrollo Guiado por Pruebas (TDD). |
+| **2** | **Instalación de Jest** | Se instaló Jest como herramienta principal para ejecutar pruebas unitarias. | `npm install --save-dev jest` | Uso de herramientas estándar de la industria. | **Kent Beck** – Promueve el uso de herramientas que permitan automatizar pruebas. |
+| **3** | **Configuración de Jest** | Se configuró el script de pruebas dentro del archivo package.json. | `"test": "jest"` (en package.json) | Automatización del proceso de testing. | **Kent Beck** – Relacionado con el ciclo Red-Green-Refactor. |
+| **4** | **Creación del archivo de pruebas** | Se creó el archivo donde se definieron los tests. | `calculadora.test.js` | Organización del código y separación entre lógica y pruebas. | **Robert C. Martin** – Promueve la separación de responsabilidades en Clean Code. |
+| **5** | **Desarrollo de pruebas pequeñas y enfocadas** | Se escribieron pruebas individuales para validar comportamientos específicos. | `test()` o `it()` | Pruebas pequeñas y enfocadas. | **Kent Beck** – Recomienda pruebas simples y específicas dentro del TDD. |
+| **6** | **Uso de nombres descriptivos** | Se asignaron nombres claros que indican qué comportamiento se valida. | `test("suma de dos numeros enteros positivos")` | Uso de nombres descriptivos. | **Robert C. Martin** – Indica que los nombres deben expresar la intención del código. |
+| **7** | **Uso del patrón AAA** | Se organizaron los tests en Arrange (Preparar), Act (Ejecutar) y Assert (Verificar). | Variables de prueba → ejecutar función → `expect(resultado).toBe()` | Estructura organizada de pruebas. | **Bill Wake** – Creador del patrón AAA utilizado en pruebas unitarias. |
+| **8** | **Validación de resultados correctos** | Se verificó que la función retorne el resultado esperado. | `expect(resultado).toBe(valorEsperado)` | Pruebas basadas en comportamiento. | **Kent Beck** – Establece que las pruebas deben validar comportamientos observables del sistema. |
+| **9** | **Validación de manejo de errores** | Se comprobó que la función lance excepciones ante datos inválidos. | `expect(() => suma()).toThrow()` | Pruebas de casos borde (Edge Cases). | **Glenford Myers, Martin Fowler, Jim Shore** – Destacan la importancia de probar límites y el principio Fail-Fast. |
+| **10** | **Independencia de pruebas** | Cada prueba se ejecuta sin depender de otra, usando sus propios datos. | Cada test con sus propios datos de prueba | Independencia de pruebas. | **Kent Beck** – Señala que cada prueba debe ejecutarse de manera independiente en TDD. |
+| **11** | **Ejecución automatizada de pruebas** | Se ejecutaron todos los tests para verificar el funcionamiento del sistema. | `npm test` | Automatización y validación continua. | **Kent Beck** – Propone ejecutar pruebas constantemente durante el desarrollo. |
+| **12** | **Verificación de resultados** | Se revisaron los reportes generados por Jest para confirmar que todas las pruebas pasen correctamente. | Salida en consola de Jest (resultados de pruebas) | Desarrollo de software confiable y robusto. | **Glenford Myers** – Indica que el testing permite detectar fallos y mejorar la calidad del software. |
 
 ## **Comandos de ejecución**:
 + Antes de nada, activamos nuestra cuenta en aws y los IAM para en la terminal ejecutar el "aws configure sso"
